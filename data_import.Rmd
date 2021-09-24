@@ -17,3 +17,25 @@ litters_df = janitor::clean_names(litters_df)
 ```
 
 ## Take a look at the data
+
+Printing in the console.
+
+```{r}
+litters_df
+```
+
+Check first 6 rows and last 6 rows of the dataset
+```{r}
+head(litters_df)
+tail(litters_df)
+```
+
+Skimr feature tells you how many missing values there are and some basic descriptive statistics. It also prints out a histogram of numeric variables.
+```{r}
+skimr::skim(litters_df)
+```
+
+In the console, type "view(litters_df)" but avoid putting it in a code chunk the R markdown document.
+
+Note: <dbl> is a specific type of number variable
+
