@@ -3,8 +3,12 @@ title: "Data import"
 output: github_document
 ---
 
+Load libraries that you will need:
+
 ```{r setup}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 ## Read in some data
@@ -39,13 +43,48 @@ In the console, type "view(litters_df)" but avoid putting it in a code chunk the
 
 Note:
 <dbl> is a specific type of number variable
-?read_csv opens help file for the read_csv function
 
 ## Options to read_csv
+
+Check out '?read_csv' for more information, opens help file for the read_csv function
 
 Skip the first 10 rows, don't use first row as column names
 
 ```{r}
 litters_df = read_csv("./data/FAS_litters.csv", skip = 10, col_names = FALSE)
+```
+
+Define all missing values as NA
+
+```{r}
+litters_df = read_csv("./data/FAS_litters.csv", na = c("", "NA", ".", 999))
+```
+
+Column types - use "col_types"
+
+## Other file formats
+
+Read in an excel file, using readxl package.
+
+```{r}
+mlb_df = read_excel("./data/mlb11.xlsx")
+mlb_df
+```
+
+Read in range of data cells
+
+```{r}
+mlb_df = read_excel("./data/mlb11.xlsx", range = "A1:F7")
+mlb_df
+```
+
+Check out '?read_excel' for more information, opens help file for the read_csv function
+
+Read in a SAS file, using haven package.
+
+```{r}
+pulse_df = read_sas("./data/public_pulse_data.sas7bdat")
+pulse_df = janitor::clean_names(pulse_df)
+pulse_df
 ```
 
