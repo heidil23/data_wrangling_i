@@ -37,5 +37,15 @@ skimr::skim(litters_df)
 
 In the console, type "view(litters_df)" but avoid putting it in a code chunk the R markdown document.
 
-Note: <dbl> is a specific type of number variable
+Note:
+<dbl> is a specific type of number variable
+?read_csv opens help file for the read_csv function
+
+## Options to read_csv
+
+Skip the first 10 rows, don't use first row as column names
+
+```{r}
+litters_df = read_csv("./data/FAS_litters.csv", skip = 10, col_names = FALSE)
+```
 
