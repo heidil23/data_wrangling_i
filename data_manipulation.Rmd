@@ -156,4 +156,22 @@ litters_df =
 
 ```
 
+Learning assessments
 
+```{r}
+filter(pups_df, sex == 1)
+filter(pups_df, pd_walk < 11, sex == 2)
+
+mutate(
+  pups_df,
+  pd_pivot_7 = pd_pivot - 7,
+  pd_sum = pd_ears + pd_eyes + pd_pivot + pd_walk
+)
+
+pups_df =
+  read_csv("./data/FAS_pups.csv", col_types = "ciiiii") %>% 
+  janitor::clean_names() %>% 
+  filter(sex == 1) %>% 
+  select(-pd_ears) %>% 
+  mutate(pd_pivot_7_greater = pd_pivot > 6)
+```
