@@ -18,4 +18,49 @@ Read in the litters dataset.
 ```{r}
 litters_df = read_csv("./data/FAS_litters.csv")
 litters_df = janitor::clean_names(litters_df)
+
+pups_df = read_csv("./data/FAS_pups.csv")
+pups_df = janitor::clean_names(pups_df)
 ```
+
+
+## 'select'
+
+Let's select some columns.
+
+```{r}
+select(litters_df, group, litter_number)
+select(litters_df, group, gd0_weight, gd18_weight)
+
+```
+
+Colon keeps columns between two variables
+Starts with, contains
+Minus signs says every variable except that one
+Can use equal sign to rename variables or use 'rename'
+Last line relocates 'litter_number' to be the first variable, can also use relocate function
+
+```{r}
+select(litters_df, group, gd0_weight:gd_of_birth)
+select(litters_df, group, starts_with("pups"))
+select(litters_df, -litter_number)
+
+select(litters_df, GROUP = group, litter_number)
+
+rename(litters_df, GROUP = group)
+
+select(litters_df, litter_number, everything())
+
+relocate(litters_df, litter_number)
+```
+
+Using the Pups data set, select litter number, sex, PD ears
+Can use either formula here.
+
+```{r}
+pups_df
+select(pups_df, litter_number, sex, pd_ears)
+select(pups_df, litter_number:pd_ears)
+```
+
+
