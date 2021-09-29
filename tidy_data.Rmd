@@ -128,6 +128,46 @@ Litter number will be the key.
 fas_df = 
   left_join(pups_df, litters_df, by = "litter_number") %>% 
   arrange(litter_number) %>% 
-  relocate(litter_number, dose, day_of_tx)
+  relocate(litter_number, dose, day_of_tx) 
+```
+
+## Learning assessments
+
+In the litters data, the variables gd0_weight and gd18_weight give the weight of the mother mouse on gestational days 0 and 18. Write a data cleaning chain that retains only litter_number and these columns; produces new variables gd and weight; and makes gd a numeric variable taking values 0 and 18.
+
+```{r}
+litters_df =
+  read_csv("./data/FAS_litters.csv") %>% 
+  janitor::clean_names() %>% 
+  select(litter_number, gd0_weight, gd18_weight) %>% 
+  pivot_longer(
+    gd0_weight:gd18_weight,
+    names_to = "gd",
+    values_to = "weight") %>% 
+  mutate(gd = recode(gd, "gd0_weight" = 0, "gd18_weight" = 18))
+
+```
+
+First dataset has responses to a question about operating systems, and the second has responses to questions about degree program and git experience. Write a code chunk that imports and cleans both datasets, and then joins them.
+
+```{r}
+surv_os = read_csv("./data/surv_os.csv") %>% 
+  janitor::clean_names() %>%
+  rename(uni = what_is_your_uni) %>% 
+  rename(os = what_operating_system_do_you_use)
+
+surv_program = read_csv("./data/surv_program_git.csv") %>% 
+  janitor::clean_names()%>%
+  rename(uni = what_is_your_uni) %>% 
+  rename(degree = what_is_your_degree_program) %>% 
+  rename(git_experience = which_most_accurately_describes_your_experience_with_git)
+
+surv_df = 
+  left_join(surv_os, surv_program, by = "uni") %>% 
+  arrange(uni) %>% 
+  relocate(uni, os, degree) 
+
+surv_df_2 =
+  inner_join(surv_os, surv_program)
 ```
 

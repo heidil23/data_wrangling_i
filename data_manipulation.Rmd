@@ -128,7 +128,7 @@ arrange(litters_df, gd_of_birth, gd0_weight)
 
 ## Pipes
 
-Shortcut for pipe is 'shift + command + M'
+Shortcut for pipe is 'shift + command + M' for mac or 'shift + ctrl + M' for PC
 
 ```{r}
 litters_data_raw = read_csv("data/FAS_litters.csv")
