@@ -1,0 +1,11 @@
+---
+title: "Tidy Data"
+output: github_document
+---
+
+Load libraries that you will need:
+
+```{r setup}
+library(tidyverse)
+```
+
